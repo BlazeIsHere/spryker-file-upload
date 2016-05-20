@@ -1,0 +1,32 @@
+{
+  "name": "project-a/spryker-file-upload",
+  "autoload": {
+    "psr-0": {
+      "Pav": "src/",
+      "Function": "tests/",
+      "Unit": "tests/"
+    },
+    "psr-4": {
+      "Propel\\Module\\": "tests/_support/Module"
+    }
+  },
+  "require": {
+    "spryker/application": "^2.0.0",
+    "spryker/console": "^2.0.0",
+    "spryker/kernel": "^2.0.0",
+    "spryker/library": "^2.0.0",
+    "spryker/monolog": "^2.0.0",
+    "spryker/silex": "^2.0.0",
+    "spryker/symfony": "^2.0.0",
+    "spryker/config": "^2.0.0"
+  },
+  "description": "file upload bundle",
+  "license": "proprietary",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
