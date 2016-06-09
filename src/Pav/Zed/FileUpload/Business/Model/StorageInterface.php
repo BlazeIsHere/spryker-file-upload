@@ -5,12 +5,12 @@ interface StorageInterface
 {
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param \SplFileInfo $file
      *
      * @return mixed
      */
-    public function saveFile($containerName, \SplFileInfo $file);
+    public function saveFile($type, \SplFileInfo $file);
 
     /**
      * @param string $filePath
@@ -20,25 +20,25 @@ interface StorageInterface
     public function deleteFile($filePath);
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @return array
      */
-    public function listFilesByContainerName($containerName);
+    public function listFilesByType($type);
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param string $fileName
      *
      * @return false|resource
      */
-    public function readFileStream($containerName, $fileName);
+    public function readFileStream($type, $fileName);
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param string $fileName
      *
      * @return bool
      */
-    public function fileExist($containerName, $fileName);
+    public function fileExist($type, $fileName);
 
 }

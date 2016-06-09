@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 abstract class AbstractImageController extends AbstractController
 {
+
     const FILE_REQUEST = 'uploadedFile';
 
     /**

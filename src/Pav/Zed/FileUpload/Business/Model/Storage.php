@@ -18,46 +18,46 @@ class Storage implements StorageInterface
     /**
      * @var string
      */
-    protected $baseUrl;
+    protected $mapping;
 
     /**
      * @param \League\Flysystem\FilesystemInterface $filesystem
-     * @param string $baseUrl
+     * @param string $mapping
      */
-    public function __construct(FilesystemInterface $filesystem, $baseUrl)
+    public function __construct(FilesystemInterface $filesystem, $mapping)
     {
         $this->filesystem = $filesystem;
-        $this->baseUrl = $baseUrl;
+        $this->mapping = $mapping;
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param \SplFileInfo $file
      *
      * @return bool
      */
-    public function saveFile($containerName, \SplFileInfo $file)
+    public function saveFile($type, \SplFileInfo $file)
     {
         $fileName = $file->getFilename();
-        $filePath = $this->getFullFileName($containerName, $fileName);
+        $filePath = $this->getFullFileName($type, $fileName);
 
         return $this->move($file->getRealPath(), $filePath);
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      *
      * @return bool
      */
-    public function saveUploadedFile($containerName, UploadedFile $file)
+    public function saveUploadedFile($type, UploadedFile $file)
     {
         if ($file->isValid() === false) {
             return false;
         }
 
         $fileName = $file->getClientOriginalName();
-        $filePath = $this->getFullFileName($containerName, $fileName);
+        $filePath = $this->getFullFileName($type, $fileName);
 
         return $this->move($file->getRealPath(), $filePath);
     }
@@ -75,15 +75,15 @@ class Storage implements StorageInterface
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      *
      * @return array
      */
-    public function listFilesByContainerName($containerName)
+    public function listFilesByType($type)
     {
         $files = [];
-        foreach ($this->filesystem->listContents($containerName, true) as $file) {
-            $file['mapped_path'] = sprintf('%s/%s', $this->baseUrl, $file['path']);
+        foreach ($this->filesystem->listContents($type, true) as $file) {
+            $file['mapped_path'] = sprintf('%s/%s', $this->mapping, $file['path']);
 
             if (array_key_exists('size', $file)) {
                 $file['size_human'] = FileSize::convertToHumanReadable($file['size']);
@@ -107,40 +107,40 @@ class Storage implements StorageInterface
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param string $fileName
      *
      * @return false|resource
      */
-    public function readFileStream($containerName, $fileName)
+    public function readFileStream($type, $fileName)
     {
-        $fullFileName = $this->getFullFileName($containerName, $fileName);
+        $fullFileName = $this->getFullFileName($type, $fileName);
 
         return $this->filesystem->readStream($fullFileName);
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param string $fileName
      *
      * @return bool
      */
-    public function fileExist($containerName, $fileName)
+    public function fileExist($type, $fileName)
     {
-        $fullFileName = $this->getFullFileName($containerName, $fileName);
+        $fullFileName = $this->getFullFileName($type, $fileName);
 
         return $this->filesystem->has($fullFileName);
     }
 
     /**
-     * @param string $containerName
+     * @param string $type
      * @param string $fileName
      *
      * @return string
      */
-    protected function getFullFileName($containerName, $fileName)
+    protected function getFullFileName($type, $fileName)
     {
-        return sprintf('%s/%s', $containerName, $fileName);
+        return sprintf('%s/%s', $type, $fileName);
     }
 
     /**
