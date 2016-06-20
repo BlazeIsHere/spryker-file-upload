@@ -79,7 +79,7 @@ class Storage implements StorageInterface
      *
      * @return array
      */
-    public function listFilesByType($containerName)
+    public function listFilesByContainerName($containerName)
     {
         $files = [];
         foreach ($this->filesystem->listContents($containerName, true) as $file) {

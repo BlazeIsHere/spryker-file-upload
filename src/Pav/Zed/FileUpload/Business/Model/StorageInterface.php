@@ -23,7 +23,7 @@ interface StorageInterface
      * @param string $containerName
      * @return array
      */
-    public function listFilesByType($containerName);
+    public function listFilesByContainerName($containerName);
 
     /**
      * @param string $containerName
