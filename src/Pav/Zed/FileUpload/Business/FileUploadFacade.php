@@ -92,11 +92,11 @@ class FileUploadFacade extends AbstractFacade
      *
      * @return bool
      */
-    public function fileExist($containerName, $fileName)
+    public function fileExists($containerName, $fileName)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->fileExist($containerName, $fileName);
+            ->fileExists($containerName, $fileName);
     }
 
 }

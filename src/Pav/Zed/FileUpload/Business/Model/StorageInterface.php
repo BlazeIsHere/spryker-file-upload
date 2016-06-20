@@ -39,6 +39,6 @@ interface StorageInterface
      *
      * @return bool
      */
-    public function fileExist($containerName, $fileName);
+    public function fileExists($containerName, $fileName);
 
 }
