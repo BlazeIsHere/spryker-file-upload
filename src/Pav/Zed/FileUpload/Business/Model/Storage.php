@@ -125,7 +125,7 @@ class Storage implements StorageInterface
      *
      * @return bool
      */
-    public function fileExist($containerName, $fileName)
+    public function fileExists($containerName, $fileName)
     {
         $fullFileName = $this->getFullFileName($containerName, $fileName);
 
