@@ -2,9 +2,9 @@
 
 namespace Pav\Zed\FileUpload\Business;
 
-use Pav\Zed\Document\FileUploadDependencyProvider;
 use Pav\Zed\FileUpload\Business\Model\Storage;
 use Pav\Zed\FileUpload\Business\Model\StorageProvider;
+use Pav\Zed\FileUpload\FileUploadDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**

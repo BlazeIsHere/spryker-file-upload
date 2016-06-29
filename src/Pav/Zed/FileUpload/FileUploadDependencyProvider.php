@@ -1,6 +1,6 @@
 <?php
 
-namespace Pav\Zed\Document;
+namespace Pav\Zed\FileUpload;
 
 use Pav\Zed\FileUpload\Communication\Plugin\LocalFileSystemPlugin;
 use Pav\Zed\FileUpload\Communication\Plugin\S3FileSystemPlugin;

@@ -53,7 +53,7 @@ class StorageProvider implements StorageProviderInterface
             throw new NotImplementedException(sprintf('Type "%s" is currently not supported', $adapterName));
         }
 
-        $this->fileSystemPlugins[$adapterName]->createFileSystem($config[FileUploadConstants::CONFIG_CONFIG]);
+        return $this->fileSystemPlugins[$adapterName]->createFileSystem($config[FileUploadConstants::CONFIG_CONFIG]);
     }
 
     /**
