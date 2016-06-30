@@ -23,7 +23,7 @@
     "league/flysystem-aws-s3-v3": "~1.0.9"
   },
   "description": "file upload bundle",
-  "license": "proprietary",
+  "license": "MIT",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
