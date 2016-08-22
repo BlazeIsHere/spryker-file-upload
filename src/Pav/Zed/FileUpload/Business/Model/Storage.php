@@ -96,14 +96,16 @@ class Storage implements StorageInterface
     }
 
     /**
-
-     * @param string $filePath
+     * @param string $containerName
+     * @param string $fileName
      *
      * @return bool
      */
-    public function deleteFile($filePath)
+    public function deleteFile($containerName, $fileName)
     {
-        return $this->filesystem->delete($filePath);
+        $fullFileName = $this->getFullFileName($containerName, $fileName);
+
+        return $this->filesystem->delete($fullFileName);
     }
 
     /**

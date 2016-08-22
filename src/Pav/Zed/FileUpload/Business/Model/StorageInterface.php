@@ -13,11 +13,12 @@ interface StorageInterface
     public function saveFile($containerName, \SplFileInfo $file);
 
     /**
-     * @param string $filePath
+     * @param string $containerName
+     * @param string $fileName
      *
      * @return bool
      */
-    public function deleteFile($filePath);
+    public function deleteFile($containerName, $fileName);
 
     /**
      * @param string $containerName

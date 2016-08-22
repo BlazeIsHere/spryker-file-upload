@@ -47,7 +47,7 @@ class FileUploadFacade extends AbstractFacade
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->deleteFile($filePath);
+            ->deleteFile($containerName, $filePath);
     }
 
     /**
