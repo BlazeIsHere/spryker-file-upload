@@ -33,13 +33,14 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param \SplFileInfo $file
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function saveFile($containerName, \SplFileInfo $file)
+    public function saveFile($containerName, \SplFileInfo $file, $relativePath)
     {
         $fileName = $file->getFilename();
-        $filePath = $this->getFullFileName($containerName, $fileName);
+        $filePath = $this->getFullFileName($containerName, $fileName, $relativePath);
 
         return $this->move($file->getRealPath(), $filePath);
     }
@@ -47,10 +48,11 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function saveUploadedFile($containerName, UploadedFile $file)
+    public function saveUploadedFile($containerName, UploadedFile $file, $relativePath)
     {
         if ($file->isValid() === false) {
             return false;
@@ -98,12 +100,13 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function deleteFile($containerName, $fileName)
+    public function deleteFile($containerName, $fileName, $relativePath)
     {
-        $fullFileName = $this->getFullFileName($containerName, $fileName);
+        $fullFileName = $this->getFullFileName($containerName, $fileName, $relativePath);
 
         return $this->filesystem->delete($fullFileName);
     }
@@ -111,12 +114,13 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return false|resource
      */
-    public function readFileStream($containerName, $fileName)
+    public function readFileStream($containerName, $fileName, $relativePath)
     {
-        $fullFileName = $this->getFullFileName($containerName, $fileName);
+        $fullFileName = $this->getFullFileName($containerName, $fileName, $relativePath);
 
         return $this->filesystem->readStream($fullFileName);
     }
@@ -124,12 +128,13 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function fileExists($containerName, $fileName)
+    public function fileExists($containerName, $fileName, $relativePath)
     {
-        $fullFileName = $this->getFullFileName($containerName, $fileName);
+        $fullFileName = $this->getFullFileName($containerName, $fileName, $relativePath);
 
         return $this->filesystem->has($fullFileName);
     }
@@ -137,12 +142,20 @@ class Storage implements StorageInterface
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return string
      */
-    protected function getFullFileName($containerName, $fileName)
+    protected function getFullFileName($containerName, $fileName, $relativePath)
     {
-        return sprintf('%s/%s', $containerName, $fileName);
+        if ($relativePath === null) {
+            $relativePath = '';
+        } else {
+            $relativePath = trim($relativePath, '/');
+            $relativePath = $relativePath . '/';
+        }
+
+        return sprintf('%s/%s%s', $containerName, $relativePath, $fileName);
     }
 
     /**

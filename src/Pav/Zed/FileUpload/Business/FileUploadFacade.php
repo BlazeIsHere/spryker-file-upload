@@ -14,40 +14,43 @@ class FileUploadFacade extends AbstractFacade
     /**
      * @param string $containerName
      * @param \SplFileInfo $file
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function saveFile($containerName, \SplFileInfo $file)
+    public function saveFile($containerName, \SplFileInfo $file, $relativePath)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->saveFile($containerName, $file);
+            ->saveFile($containerName, $file, $relativePath);
     }
 
     /**
      * @param string $containerName
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function saveUploadedFile($containerName, UploadedFile $file)
+    public function saveUploadedFile($containerName, UploadedFile $file, $relativePath)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->saveUploadedFile($containerName, $file);
+            ->saveUploadedFile($containerName, $file, $relativePath);
     }
 
     /**
      * @param string $containerName
      * @param string $filePath
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function deleteFile($containerName, $filePath)
+    public function deleteFile($containerName, $filePath, $relativePath)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->deleteFile($containerName, $filePath);
+            ->deleteFile($containerName, $filePath, $relativePath);
     }
 
     /**
@@ -76,27 +79,29 @@ class FileUploadFacade extends AbstractFacade
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return false|resource
      */
-    public function readFileStream($containerName, $fileName)
+    public function readFileStream($containerName, $fileName, $relativePath)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->readFileStream($containerName, $fileName);
+            ->readFileStream($containerName, $fileName, $relativePath);
     }
 
     /**
      * @param string $containerName
      * @param string $fileName
+     * @param string|null $relativePath
      *
      * @return bool
      */
-    public function fileExists($containerName, $fileName)
+    public function fileExists($containerName, $fileName, $relativePath)
     {
         return $this->getFactory()
             ->createStorage($containerName)
-            ->fileExists($containerName, $fileName);
+            ->fileExists($containerName, $fileName, $relativePath);
     }
 
 }
