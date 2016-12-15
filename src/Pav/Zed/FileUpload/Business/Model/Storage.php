@@ -181,6 +181,8 @@ class Storage implements StorageInterface
             return false;
         }
 
+        unlink($sourcePath);
+
         return $success;
     }
 
